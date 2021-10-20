@@ -1,40 +1,80 @@
 <template>
-  <div id="app" class="test">
-    <Nav></Nav>
-    <Content></Content>
-    <Nav></Nav>
-    <Content></Content>
-    <h3>Footer</h3>
+  <div class="main">
+    <ul>
+      <li
+        v-for="todo in todos"
+        :key="todo.time"
+        :class="{ red: !todo.completed, green: todo.completed }"
+      >
+        {{ todo.text }}
+      </li>
+      <p>
+        {{ text }}
+      </p>
+      <input type="text" v-model="text" />
+    </ul>
   </div>
 </template>
 
 <script>
-import Nav from "./components/Nav.vue";
-import Content from "./components/Content.vue";
-
 export default {
-  name: "App",
-  components: {
-    Nav,
-    Content,
+  name: "Main",
+  filters: {
+    capitalize(val) {
+      return val.toUpperCase();
+    },
+  },
+
+  data() {
+    return {
+      color: "red",
+      todos: [
+        {
+          text: "Todo1",
+          completed: true,
+          time: 1526710200,
+        },
+        {
+          text: "Todo2",
+          completed: false,
+          time: 1526710200,
+        },
+        {
+          text: "Todo3",
+          completed: true,
+          time: 1526710200,
+        },
+        {
+          text: "Todo4",
+          completed: false,
+          time: 1526710200,
+        },
+        {
+          text: "Todo5",
+          completed: true,
+          time: 1526710200,
+        },
+      ],
+    };
   },
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+.main {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: white;
+  background-color: black;
   margin-top: 60px;
 }
-.test {
-  display: flex;
-  height: 100vh;
-  background-color: red;
-  flex-direction: column;
-  justify-content: space-between;
+
+.red {
+  color: crimson;
+}
+.green {
+  color: green;
 }
 </style>
