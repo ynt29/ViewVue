@@ -1,25 +1,29 @@
 <template>
-  <div class="main">
+  <div id="app">
+    <Alert>
+      <h1 slot="header">Alert Here</h1>
+      <h2 slot="text">Text Here</h2>
+    </Alert>
     <todoList :todoItems="todoItems"></todoList>
-    <input type="text" v-model="text">
+    <InputItem @save="addTodoItem"></InputItem>
   </div>
 </template>
 
 <script>
 import todoList from './components/todoList.vue'
+import InputItem from './components/InputItem.vue'
+import Alert from './components/Alert.vue'
 
 export default {
-  name: "Main",
-  components: {todoList},
- 
-  computed: {
-    sortItem () {
-      return this.todos.slice(0).sort((a, b) => {b.time - a.time})
-      }
-  },
+  name: 'app',
+  components: {todoList, InputItem},
   methods: {
-    save () {
-      alert('save')
+    addTodoItem (text) {
+      this.todoItems.push({
+        text: text,
+        time: Date.now(),
+        completed: false
+      })
     }
   },
   filters: {
@@ -27,11 +31,10 @@ export default {
       return val.toUpperCase();
     },
   },
-
   data() {
     return {
-      color: "red",
-      todos: [
+       color: "red",
+      todoItems: [
         {
           text: "Todo1",
           completed: true,
@@ -56,28 +59,27 @@ export default {
           text: "Todo5",
           completed: true,
           time: 1526710200,
-        },
-      ],
-    };
-  },
-};
+        }
+      ]
+    }
+  }
+}
 </script>
 
 <style>
-.main {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: white;
-  background-color: black;
+  background-color:white;
   margin-top: 60px;
 }
-
 .red {
   color: crimson;
 }
 .green {
   color: green;
 }
+
 </style>
