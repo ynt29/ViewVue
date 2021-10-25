@@ -1,39 +1,17 @@
 <template>
   <div class="main">
-    <ul>
-      <li
-        v-for="todo in sortItem"
-        :key="todo.time"
-        :class="{ red: !todo.completed, green: todo.completed }"
-      >
-        {{ todo.text }}
-      </li>
-      <button @click="save()">Save</button>
-      
-    </ul>
+    <todoList :todoItems="todoItems"></todoList>
+    <input type="text" v-model="text">
   </div>
 </template>
 
 <script>
+import todoList from './components/todoList.vue'
+
 export default {
   name: "Main",
-  watch: {
-    todoWatch (oldVal, newVal) {
-        console.log(oldVal, newVal)
-      }
-  },
-  beforeCreate() {
-    console.log('before create')
-  },
-  mounted () {
-    console.log("mounted!!")
-  },
-  updated () {
-
-  },
-  destroyed() {
-    
-  },
+  components: {todoList},
+ 
   computed: {
     sortItem () {
       return this.todos.slice(0).sort((a, b) => {b.time - a.time})
@@ -42,10 +20,7 @@ export default {
   methods: {
     save () {
       alert('save')
-      },
-    save2 () {
-      this.save()
-      }
+    }
   },
   filters: {
     capitalize(val) {
