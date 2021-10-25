@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <Alert>
-      <h1 slot="header">Alert Here</h1>
-      <h2 slot="text">Text Here</h2>
-    </Alert>
+ 
     <todoList :todoItems="todoItems"></todoList>
     <InputItem @save="addTodoItem"></InputItem>
   </div>
@@ -12,7 +9,6 @@
 <script>
 import todoList from './components/todoList.vue'
 import InputItem from './components/InputItem.vue'
-import Alert from './components/Alert.vue'
 
 export default {
   name: 'app',
